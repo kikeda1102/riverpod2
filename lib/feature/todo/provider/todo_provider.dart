@@ -31,9 +31,13 @@ CollectionReference<ToDo?> todoReference(TodoReferenceRef ref) {
     /// 読み取るときの；Map<String,dynamic> から ClassA
     fromFirestore: (ds, _) {
       final data = ds.data();
+      // idを取得
+      final id = ds.id;
       if (data == null) {
         return null;
       }
+      // dataにidを追加
+      data['id'] = id;
       return ToDo.fromJson(data);
     },
 
@@ -79,7 +83,7 @@ class TodoController extends _$TodoController {
 
   /// TODO②：指定したTodoインスタンスを完了状態に変更する関数を実装してみよう
   /// TodoクラスのisCompletedプロパティをtrueに変更すればいいね
-  Future<void> ToggleCompleted(ToDo todo) async {
+  Future<void> ToggleIsCompleted(ToDo todo) async {
     if (state.isLoading) {
       return;
     }
