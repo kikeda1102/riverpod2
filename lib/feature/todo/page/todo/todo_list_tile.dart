@@ -16,6 +16,7 @@ class TodoListTile extends ConsumerWidget {
     /// TODO①：完了状態に変更できるよUIを作成しよう
     return ListTile(
       title: Text(todo.description),
+      subtitle: Text(todo.createdAt.dateTime.toString()),
       // チェックボックス
       leading: Checkbox(
         value: todo.isCompleted,

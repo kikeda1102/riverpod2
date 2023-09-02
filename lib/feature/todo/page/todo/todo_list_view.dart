@@ -16,6 +16,9 @@ class TodoListView extends ConsumerWidget {
     return ref.watch(todosProvider).when(
           /// 読み取り成功！
           data: (data) {
+            // dataをIsCompletedでソートする
+            data.sort((a, b) => a.isCompleted ? 1 : -1);
+
             return ListView.builder(
               shrinkWrap: true,
               itemCount: data.length,
