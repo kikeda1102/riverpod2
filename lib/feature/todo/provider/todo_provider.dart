@@ -79,4 +79,17 @@ class TodoController extends _$TodoController {
 
   /// TODO②：指定したTodoインスタンスを完了状態に変更する関数を実装してみよう
   /// TodoクラスのisCompletedプロパティをtrueに変更すればいいね
+  Future<void> ToggleCompleted(ToDo todo) async {
+    if (state.isLoading) {
+      return;
+    }
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      // isCompleteをtoggleする
+      await ref
+          .read(todoReferenceProvider)
+          .doc(todo.id)
+          .update({'isCompleted': !todo.isCompleted});
+    });
+  }
 }
